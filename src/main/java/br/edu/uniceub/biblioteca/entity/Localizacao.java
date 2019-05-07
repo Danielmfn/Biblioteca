@@ -14,10 +14,20 @@ public class Localizacao implements Serializable {
     private Integer id;
 
     @Column(name = "ds_localizacao")
-    private String localizacao;
+    private String nome;
 
     @OneToMany(mappedBy = "localizacao")
     private List<Livro> livros;
+
+    @Column(name = "id_localizacao_pai")
+    private Integer idPai;
+
+    @ManyToOne
+    @JoinColumn(name = "id_localizacao_pai")
+    private Localizacao localizacao;
+
+    @OneToMany(mappedBy = "localizacao")
+    private List<Localizacao> localizacoes;
 
     public Localizacao() {
     }
@@ -38,15 +48,43 @@ public class Localizacao implements Serializable {
         return id.hashCode();
     }
 
+    public List<Localizacao> getLocalizacoes() {
+        return localizacoes;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getIdPai() {
+        return idPai;
+    }
+
+    public void setIdPai(Integer idPai) {
+        this.idPai = idPai;
+    }
+
+    public Localizacao getLocalizacao() {
+        return localizacao;
+    }
+
+    public void setLocalizacao(Localizacao localizacao) {
+        this.localizacao = localizacao;
+    }
+
     public List<Livro> getLivros() {
         return livros;
     }
 
-    public String getLocalizacao() {
-        return localizacao;
+    public String getNome() {
+        return nome;
     }
 
-    public void setLocalizacao(String localizacao) {
-        this.localizacao = localizacao;
+    public void setNome(String localizacao) {
+        this.nome = localizacao;
     }
 }

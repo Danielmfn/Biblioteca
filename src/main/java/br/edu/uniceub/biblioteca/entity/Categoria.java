@@ -22,6 +22,16 @@ public class Categoria implements Serializable {
     public Categoria() {
     }
 
+    @Column(name = "id_categoria_pai")
+    private Integer idPai;
+
+    @ManyToOne
+    @JoinColumn(name = "id_categoria_pai")
+    private Categoria categoria;
+
+    @OneToMany(mappedBy = "categoria")
+    private List<Categoria> categorias;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -36,6 +46,26 @@ public class Categoria implements Serializable {
     @Override
     public int hashCode() {
         return id.hashCode();
+    }
+
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public Integer getIdPai() {
+        return idPai;
+    }
+
+    public void setIdPai(Integer idPai) {
+        this.idPai = idPai;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public List<Livro> getLivros() {
